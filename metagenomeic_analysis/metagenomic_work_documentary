@@ -1,0 +1,267 @@
+Metagenomic analysis 
+
+1:sequencing 
+NextEra DNA Flex Library Prep
+NextSeq 300 Cycles 
+PE 150 MID 
+
+1:quality control of raw reads 
+
+Use FastQC and MutiQC. No command line use. Work done by graphic interface. 
+
+work saved at /home/hl46161/metagenomic_analysis/metagenomic_data/data_quality_score
+
+2:genome assebly 
+
+Use Megahit done on sapelo2. Script as follow:
+
+#PBS _S /bin/bash
+#PBS -N j_megahit
+#PBS -q wallace_q
+#PBS -l nodes=1:ppn=48
+#PBS -l walltime=480:00:00
+#PBS -l mem=200gb
+
+cd $PBS_O_WORKDIR
+
+module load MEGAHIT/1.1.3-foss-2016b-Python-2.7.14
+megahit -t 48 -m 0.9 -1 18S-AH_S11_L001_R1_001.fastq.gz,24S-AH_S8_L001_R1_001.fastq.gz,18S-AH_S11_L002_R1_001.fastq.gz,24S-AH_S8_L002_R1_001.fastq.gz,18S-AH_S11_L003_R1_001.fastq.gz,24S-AH_S8_L003_R1_001.fastq.gz,18S-AH_S11_L004_R1_001.fastq.gz,24S-AH_S8_L004_R1_001.fastq.gz,19S-AH_S7_L001_R1_001.fastq.gz,25S-AH_S6_L001_R1_001.fastq.gz,19S-AH_S7_L002_R1_001.fastq.gz,25S-AH_S6_L002_R1_001.fastq.gz,19S-AH_S7_L003_R1_001.fastq.gz,25S-AH_S6_L003_R1_001.fastq.gz,19S-AH_S7_L004_R1_001.fastq.gz,25S-AH_S6_L004_R1_001.fastq.gz,20S-AH_S2_L001_R1_001.fastq.gz,26S-AH_S12_L001_R1_001.fastq.gz,20S-AH_S2_L002_R1_001.fastq.gz,26S-AH_S12_L002_R1_001.fastq.gz,20S-AH_S2_L003_R1_001.fastq.gz,26S-AH_S12_L003_R1_001.fastq.gz,20S-AH_S2_L004_R1_001.fastq.gz,26S-AH_S12_L004_R1_001.fastq.gz,21S-AH_S10_L001_R1_001.fastq.gz,27S-AH_S3_L001_R1_001.fastq.gz,21S-AH_S10_L002_R1_001.fastq.gz,27S-AH_S3_L002_R1_001.fastq.gz,21S-AH_S10_L003_R1_001.fastq.gz,27S-AH_S3_L003_R1_001.fastq.gz,21S-AH_S10_L004_R1_001.fastq.gz,27S-AH_S3_L004_R1_001.fastq.gz,22S-AH_S4_L001_R1_001.fastq.gz,28S-AH_S9_L001_R1_001.fastq.gz,22S-AH_S4_L002_R1_001.fastq.gz,28S-AH_S9_L002_R1_001.fastq.gz,22S-AH_S4_L003_R1_001.fastq.gz,28S-AH_S9_L003_R1_001.fastq.gz,22S-AH_S4_L004_R1_001.fastq.gz,28S-AH_S9_L004_R1_001.fastq.gz,23S-AH_S1_L001_R1_001.fastq.gz,29S-AH_S5_L001_R1_001.fastq.gz,23S-AH_S1_L002_R1_001.fastq.gz,29S-AH_S5_L002_R1_001.fastq.gz,23S-AH_S1_L003_R1_001.fastq.gz,29S-AH_S5_L003_R1_001.fastq.gz,23S-AH_S1_L004_R1_001.fastq.gz,29S-AH_S5_L004_R1_001.fastq.gz -2 18S-AH_S11_L001_R2_001.fastq.gz,24S-AH_S8_L001_R2_001.fastq.gz,18S-AH_S11_L002_R2_001.fastq.gz,24S-AH_S8_L002_R2_001.fastq.gz,18S-AH_S11_L003_R2_001.fastq.gz,24S-AH_S8_L003_R2_001.fastq.gz,18S-AH_S11_L004_R2_001.fastq.gz,24S-AH_S8_L004_R2_001.fastq.gz,19S-AH_S7_L001_R2_001.fastq.gz,25S-AH_S6_L001_R2_001.fastq.gz,19S-AH_S7_L002_R2_001.fastq.gz,25S-AH_S6_L002_R2_001.fastq.gz,19S-AH_S7_L003_R2_001.fastq.gz,25S-AH_S6_L003_R2_001.fastq.gz,19S-AH_S7_L004_R2_001.fastq.gz,25S-AH_S6_L004_R2_001.fastq.gz,20S-AH_S2_L001_R2_001.fastq.gz,26S-AH_S12_L001_R2_001.fastq.gz,20S-AH_S2_L002_R2_001.fastq.gz,26S-AH_S12_L002_R2_001.fastq.gz,20S-AH_S2_L003_R2_001.fastq.gz,26S-AH_S12_L003_R2_001.fastq.gz,20S-AH_S2_L004_R2_001.fastq.gz,26S-AH_S12_L004_R2_001.fastq.gz,21S-AH_S10_L001_R2_001.fastq.gz,27S-AH_S3_L001_R2_001.fastq.gz,21S-AH_S10_L002_R2_001.fastq.gz,27S-AH_S3_L002_R2_001.fastq.gz,21S-AH_S10_L003_R2_001.fastq.gz,27S-AH_S3_L003_R2_001.fastq.gz,21S-AH_S10_L004_R2_001.fastq.gz,27S-AH_S3_L004_R2_001.fastq.gz,22S-AH_S4_L001_R2_001.fastq.gz,28S-AH_S9_L001_R2_001.fastq.gz,22S-AH_S4_L002_R2_001.fastq.gz,28S-AH_S9_L002_R2_001.fastq.gz,22S-AH_S4_L003_R2_001.fastq.gz,28S-AH_S9_L003_R2_001.fastq.gz,22S-AH_S4_L004_R2_001.fastq.gz,28S-AH_S9_L004_R2_001.fastq.gz,23S-AH_S1_L001_R2_001.fastq.gz,29S-AH_S5_L001_R2_001.fastq.gz,23S-AH_S1_L002_R2_001.fastq.gz,29S-AH_S5_L002_R2_001.fastq.gz,23S-AH_S1_L003_R2_001.fastq.gz,29S-AH_S5_L003_R2_001.fastq.gz,23S-AH_S1_L004_R2_001.fastq.gz,29S-AH_S5_L004_R2_001.fastq.gz --presets meta-large -o ./living_mulch_out_put
+
+
+
+
+
+
+3:use quat to assess the quality of assembly 
+
+/home/hl46161/metagenomic_analysis/quast/quast-5.0.2/quast.py /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa -o assembly_assessment_result
+
+
+#these command no longer correct metagenome can not be assess without a reference 
+python /home/hl46161/metagenomic_analysis/quast/quast-5.0.2/metaquast.py -r /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa --pe1 /home/hl46161/metagenomic_analysis/metagenomic_data/18S-AH_S11_L001_R1_001.fastq.gz --pe2 /home/hl46161/metagenomic_analysis/metagenomic_data/18S-AH_S11_L001_R2_001.fastq.gz -o assembly_assessment_result_2 --thread 6
+
+
+4:cat all data file into one single gile and use kraken2 to do taxonomy analysis on sapelo2
+cat *.fastq.gz > living_mulch_all_data.fastq.gz
+
+
+
+5:kraken2 taxonomic analysis 
+
+---------- database building 
+
+#PBS _S /bin/bash
+#PBS -N j_kraken2_db
+#PBS -q wallace_q
+#PBS -l nodes=1:ppn=20
+#PBS -l walltime=120:00:00
+#PBS -l mem=200gb
+
+
+cd $PBS_O_WORKDIR
+
+module load Kraken2/2.0.7-beta-foss-2018a-Perl-5.26.1
+
+#kraken2-build --download-taxonomy --db /scratch/hl46161/workDir/kraken2_custom_db_3
+#cd kraken2_custom_db_3/taxonomy
+#wget ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz
+#wget ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/nucl_wgs.accession2taxid.gz
+#touch accmap.dlflag
+#kraken2-build --download-taxonomy --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library bacteria --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library archaea --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library plant --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library fungi --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library nr --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+#kraken2-build --download-library env_nr --threads 20 --db /scratch/hl46161/workDir/kraken2_custom_db_5 --protein
+kraken2-build --build --db /scratch/hl46161/workDir/kraken2_custom_db_5 --thread 20 --protein
+kraken2-inspect --db kraken2_custom_db_5
+
+
+------ run kraken job 
+
+
+
+
+
+
+
+
+##convert from fastq to fasta 
+
+paste - - - - < living_mulch_all_data.fastq | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > living_mulch_all_data.fasta
+
+##try to use diamond to speed up blast result
+diamond makedb --in library.fna -d nr 
+
+cat /home/hl46161/metagenomic_analysis/metagenomic_data/29S*.fastq.gz > 29S-AH.fastq.gz
+gunzip 29S-AH.fastq.gz
+paste - - - - < 29S-AH.fastq | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > 29S-AH.fasta
+
+sed -n '1~4s/^@/>/p;2~4p' 29S-AH.fastq > 29S-AH_2.fasta
+
+diamond blastx -d nr -q /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa -o matches.m8 --taxonmap final_contig_blast_taxonmap threads --6 
+
+diamond blastx -d nr -q /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/29S-AH_test.fasta -o 29S_test.m8 --threads 6 
+
+
+6: use coconut to cut contig in smaller pieces before bining 
+
+installation 
+conda config --add channels defaults
+conda config --add channels bioconda
+conda config --add channels conda-forge
+
+conda create -n concoct_env python=3 concoct
+
+
+cut_up_fasta.py  -c 10000 -o 0 --merge_last -m /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa > contigs_10K.fa
+
+git clone https://github.com/lh3/bwa.git
+cd bwa; make
+
+7: Use BWA to map the reads to contigs
+bwa index contigs_10K.fa
+
+export METAG=/home/hl46161/metagenomic_analysis/metag-rev-sup-master
+python $METAG/Lengths.py -i final_contigs_c10K.fa > final_contigs_c10K.len
+python $METAG/Lengths.py -i coconut/contigs_10K.fa > coconut/final_contigs_c10K.len
+
+
+for file in Map/*.sam
+do
+    stub=${file%.sam}
+    stub2=${stub#Map\/}
+    echo $stub	
+    samtools view -h -b -S $file > ${stub}.bam 
+    samtools view -b -F 4 ${stub}.bam > ${stub}.mapped.bam
+    samtools sort ${stub}.mapped.bam -o ${stub}.mapped.sorted
+    bedtools genomecov -ibam ${stub}.mapped.sorted -g contigs/final_contigs_c10K.len > ${stub}_cov.txt
+done
+
+
+$METAG/LengthFilter.pl ../conconut/final_contigs_c10K.fa 1000 > final_contigs_gt1000_c10K.fa
+
+
+
+
+
+
+kraken2 --db /home/hl46161/metagenomic_analysis/Kraken2/kraken2-db --threads 6 /home/hl46161/metagenomic_analysis/metagenomic_data/allsample_data.fastq.gz --output living_mulch_kraken2_report
+/db/ncbiblast/nrte/latest
+
+
+
+kraken2-build --build --db /home/hl46161/metagenomic_analysis/Kraken2/kraken2-db
+
+paste - - - - < file.fq | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > file.fa
+
+
+#use fastspar to calculate the correlation and covariance
+#first use anaconda on sapelo2 to install 
+fastspar --otu_table living_mulch_filtered_no_Inrow_no_blank_sparcc.tsv --correlation living_mulch_filtered_no_Inrow_no_blank_correlation.csv --covariance living_mulch_filtered_no_Inrow_no_blank_covariance.tsv
+
+fastspar --otu_table living_mulch_NoCover_sparcc.tsv --correlation living_mulch_filtered_NoCover_correlation.csv --covariance living_mulch_filtered_NoCover_covariance.tsv
+
+fastspar --otu_table living_mulch_lm_sample_sparcc.tsv --correlation living_mulch_filtered_lm_sample_correlation.csv --covariance living_mulch_filtered_lm_sample_covariance.tsv
+
+
+diamond /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put
+
+
+8:
+export CONCOCT=/home/hl46161/metagenomic_analysis/metag-rev-sup-master/coconut/CONCOCT-develop
+export COGSDB_DIR=/home/hl46161/metagenomic_analysis/metag-rev-sup-master/coconut/NOG_database/
+
+
+PARALLELIZE_FLAG=0
+NUMBER_OF_CORES=10
+NUMBER_OF_THREADS=1
+NUMBER_OF_REFERENCE_MATCHES=500
+EVALUE=0.00001
+
+rpsblast -outfmt "6 qseqid sseqid evalue pident score qstart qend sstart send length slen" - max_target_seqs $NUMBER_OF_REFERENCE_MATCHES - evalue $EVALUE - query $FASTA_FILE -db $COGSDB_DIR'/Cog' -out $fileName'.out' - num_threads $NUMBER_OF_THREADS
+
+/db/eggnog-mapper-data/eggnog.db 
+
+
+./gmhmmp -m MetaGeneMark_v1.mod -f 3 -o final_contig_protein_match.gff /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa
+
+./gmhmmp -m MetaGeneMark_v1.mod -f 3 -o final_contig_protein_match.gff -a -A final_contig_protein_match.fatsa -d -D final_contig_nucleotide_match.fasta /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa
+
+gffread -x final_contig_protein_match.fatsta​ -g /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa /home/hl46161/metagenomic_analysis/metagenemark/MetaGeneMark_linux_64/mgm/final_contig_protein_match.gff 
+
+/home/hl46161/metagenomic_analysis/metagenemark/MetaGeneMark_linux_64/mgm
+
+
+#huamann2 analysis 
+
+scp –r hl46161@xfer.gacrc.uga.edu:/scratch/hl46161/workDir/humann2_results/ .
+
+#sub set data into treatment 
+cat *.fastq.gz > living_mulch_all_data.fastq.gz
+
+ bedtools getfasta -fi /home/hl46161/metagenomic_analysis/metagenomic_result/living_mulch_out_put/final.contigs.fa -bed /home/hl46161/metagenomic_analysis/metagenemark/MetaGeneMark_linux_64/mgm/final_contig_protein_match.gff -name final_contig_protein_match.fatsta
+ 
+diamond blastx -d nr -q /home/hl46161/metagenomic_analysis/metagenemark/MetaGeneMark_linux_64/mgm/final_contig_nucleotide_match.fasta -o final_contig_protein_blast_result --threads 6 
+
+/home/hl46161/miniconda3/opt/krona/scripts/ImportTaxonomy.pl -q 2 -t 3 kraken2_test_out_put_3 -o living_mulch_all_sample_taxonomic_kraken
+
+
+#PBS _S /bin/bash
+#PBS -N j_kraken2_NC
+#PBS -q batch
+#PBS -l nodes=1:ppn=15
+#PBS -l walltime=240:00:00
+#PBS -l mem=120gb
+
+cd $PBS_O_WORKDIR
+
+module load Kraken2/2.0.7-beta-foss-2018a-Perl-5.26.1
+
+kraken2 --db /scratch/hl46161/workDir/kraken2_custom_db_5 ./NoCover_reads_data/Nocover_reads.fastq.gz --unclassified-out ./NoCover_reads_data/NoCover_treatment_unclassified.txt --classified-out ./NoCover_reads_data/NoCover_treatment_classified --thread 15 --output ./NoCover_reads_data/kraken2_NC_treatment_out_put_3  --report ./NoCover_reads_data/Nocover_treatment_kraken2_report.txt
+
+
+
+
+
+
+
+./lm_reads_data/living_mulch_reads.fastq.gz
+./NoCover_reads_data/Nocover_reads.fastq.gz
+./CerealRye_reads_data/CerealRye_reads.fastq.gz
+./CrimsonClover_reads_data/CrimsonClover_reads.fastq.gz
+
+humann2_renorm_table --input living_mulch_reads_pathabundance.tsv --output living_mulch_reads_pathabundance-cpm.tsv --units cpm --update-snames
+
+humann2_renorm_table --input Nocover_reads_pathabundance.tsv --output Nocover_reads_pathabundance-cpm.tsv --units cpm --update-snames
+
+/home/hl46161/miniconda3/opt/krona/scripts/ImportTaxonomy.pl -q 2 -t 3 -i kraken2_lm_treatment_out_put_3 -o lm_treatment_krona
+
+
+
+
+for file in humann2_data/*.fastq.gz;
+do
+
+humann2 --input $file --nucleotide-database humann2_database/chocophlan --protein-database humann2_database/uniref --output humann2_all_sample_result --threa$
+
+done
+
+
+
+while read file
+do
+    echo "$file"
+    #stub=${file%_L*R1*.fastq.gz}
+    #echo "$stub" >> /home/hl46161/metagenomic_analysis/metagenomic_data/sample_name_data.txt
+    #uniq /home/hl46161/metagenomic_analysis/metagenomic_data/sample_name_data.txt
+    ##>> /home/hl46161/metagenomic_analysis/metagenomic_data/lm_sample_name_data.txt
+    #name=$(echo "$file" | sed 's/R1/R/g')
+    #name=$(echo "$name" | sed 's/fastq.gz/sam/g')
+    #smalt map $file $stub > $name
+    #cat ${file}*R1*.fastq.gz ${file}*R2*.fastq.gz > ${file}_R.fastq.gz
+    #cat ${file}*R2*.fastq.gz > ${file}_R2.fastq.gz
+    mv ${file}_R.fastq.gz ./humann2_data/
+
+done<./sample_name_data.txt
