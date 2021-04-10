@@ -1,3 +1,4 @@
 # Living_mulch project 
-# This is the tutorial 
+# work_flow.sh is the bash scripts I used to run qiime2 
+# 
 #changed tutorial
