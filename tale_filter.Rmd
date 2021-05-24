@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+
+otu_table	=	read.csv("/home/hl46161/publish_living_mulch/exported-feature-table/original_table.txt",sep="\t",row.names =1,check.names = FALSE)
+head(otu_table)
+otu_table <- subset(otu_table,P2BI == 0)
+otu_table$P2BI <-NULL
+write.table(otu_table, "/home/hl46161/publish_living_mulch/exported-feature-table/table_P2BI_filtered.txt",sep="\t")
+otu_table$P2BS <-NULL
+otu_table$P5BS <-NULL
+otu_table$`GA18-20S-600` <- NULL
+write.table(otu_table, "/home/hl46161/publish_living_mulch/exported-feature-table/table_no_blank_no_20_filtered.txt",sep="\t")
+
+?write.table
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
